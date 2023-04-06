@@ -2,6 +2,8 @@
 
 Jan-Hendrik Niemann, Samuel Uram, Sarah Wolf, Nataša Djurdjevac Conrad and Martin Weiser
 
+[https://arxiv.org/abs/2304.02281](https://arxiv.org/abs/2304.02281)
+
 Epidemiological models can not only be used to forecast the course of a pandemic like COVID-19, but also to propose and design non-pharmaceutical interventions such as school and work closing. In general, the design of optimal policies leads to nonlinear optimization problems that can be solved by numerical algorithms. Epidemiological models come in different complexities, ranging from systems of simple ordinary differential equations (ODEs) to complex agent-based models (ABMs). The former allow a fast and straightforward optimization, but are limited in accuracy, detail, and parameterization, while the latter can resolve spreading processes in detail, but are extremely expensive to optimize. We consider policy optimization in a prototypical situation modeled as both ODE and ABM, review numerical optimization approaches, and propose a heterogeneous multilevel approach based on combining a fine-resolution ABM and  a coarse ODE model. Numerical experiments, in particular with respect to convergence speed, are given for illustrative examples.
 
 ## Prerequisits
@@ -61,7 +63,7 @@ The script `ABM2ODE.m` fits an ODE to the output of GERDA. This script creates b
 <img src="data/output_0/ABM_ODE_fit.png" alt="" width="75%" height="75%" title="ODE fitted to ABM">
 </p>
 
-### Run the Optimization
+### The Optimization Algorithms
 
 `GERDA_state_estimation.py` and `GERDA_state_estimation_dummy.py` compute in parallel Monte Carlo estimates of the state and the corresponding objective function for a given control. The inputs for this script are automatically loaded from `opt_settings.txt`.
 
@@ -73,6 +75,27 @@ The script `ABM2ODE.m` fits an ODE to the output of GERDA. This script creates b
 
 `GERDA_IGD_dummy.py` finds an optimal control for a simple ABM that minimizes the number of infections at a minimum objective function value using an inexact gradient decent optimization scheme.
 
+### Run the Optimization
+
+The codes can efficiently be executed using SLURM batch script. For example, to execute `GERDA_MLO_dummy.m`, you could use the following script.
+
+
+```
+#!/bin/bash
+#SBATCH --job-name=MLO
+#SBATCH --nodes=1
+#SBATCH --ntasks=56
+#SBATCH --time=5-00:00:00
+#SBATCH --output=job_%j.log
+
+source ~/.bashrc
+conda activate gerdaenv
+module load matlab/R2019b
+
+cd <path_to_your_working_directory>
+
+matlab -nodisplay -nosplash -r "GERDA_MLO_dummy"
+```
 
 ### Plot the Result
 
