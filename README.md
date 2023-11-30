@@ -9,7 +9,7 @@ Epidemiological models can not only be used to forecast the course of a pandemic
 ## Prerequisits
 
 * Install [GERDA](https://ford.biologie.hu-berlin.de/jwodke/corona_model) and initialize as described. If you use spyder (tested only under MacOS 12.6), please install it before using `pip install -e .` as otherwise spyder might not be installed correctly.
-* Clone this repository `git clone https://github.com/Henningston/MLoptABM.git`
+* Clone this repository `git clone https://github.com/Jan-HendrikNiemann/MLoptABM.git`
 
 ## How to use the Python and MATLAB Scripts
 
